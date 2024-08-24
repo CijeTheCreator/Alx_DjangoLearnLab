@@ -12,7 +12,16 @@ class Author(models.Model):
 class Book(models.Model):
     title = models.CharField(max_length=200)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    publication_year = models.IntegerField()
 
+    class Meta:
+        permissions = [
+            ("can_add_book", "Can add book"),
+            ("can_change_book", "Can change book"),
+            ("can_delete_book", "Can delete book"),
+        ]
+
+        
     def __str__(self):
         return self.title
 
@@ -29,7 +38,11 @@ class Librarian(models.Model):
 
     def __str__(self):
         return self.name
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> a1db5cf9e92860e18f9e025eca38ba884ab79417
 
 class UserProfile(models.Model):
     ROLE_CHOICES = (
