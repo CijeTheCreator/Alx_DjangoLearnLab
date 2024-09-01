@@ -11,3 +11,5 @@ class BookViewSet(viewsets.ModelViewSet):
     serializer_class = BookSerializer
     permission_classes = [IsAuthenticated]
 
+BookList
+generics.ListAPIView
