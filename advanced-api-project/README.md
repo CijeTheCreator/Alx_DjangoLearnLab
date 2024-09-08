@@ -34,3 +34,8 @@ Example:
 /api/books/?ordering=title
 
 Copy code
+
+## Running Tests
+
+To run the tests for the API, use the following command:
+python manage.py test api
