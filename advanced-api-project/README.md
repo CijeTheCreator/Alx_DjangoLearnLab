@@ -12,3 +12,25 @@
 
 - Unauthenticated users can view books.
 - Only authenticated users can create, update, or delete books.
+
+## API Query Features
+
+### Filtering
+
+You can filter books by `title`, `author name`, or `publication year`.
+Example:
+/api/books/?title=SomeTitle&author\_\_name=SomeAuthor&publication_year=2020
+
+### Searching
+
+You can search books by `title` or `author name`.
+Example:
+/api/books/?search=SomeQuery
+
+### Ordering
+
+You can order books by `title` or `publication year`.
+Example:
+/api/books/?ordering=title
+
+Copy code
