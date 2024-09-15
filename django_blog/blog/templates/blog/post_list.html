@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post List</title>
+</head>
+<body>
+    <h1>All Blog Posts</h1>
+    <form method="GET" action="{% url 'search-posts' %}">
+        <input type="text" name="q" placeholder="Search posts..." />
+        <button type="submit">Search</button>
+    </form>
+    <ul>
+      {% for post in posts %}
+        <li>
+          <a href="{% url 'post-detail' post.id %}">{{ post.title }}</a> by {{ post.author }} on {{ post.date_posted }}
+        </li>
+      {% endfor %}
+    </ul>
+</body>
+</html>
