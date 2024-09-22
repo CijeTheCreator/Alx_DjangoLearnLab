@@ -43,15 +43,13 @@ class FeedView(generics.ListAPIView):
         return Post.objects.filter(author__in=following_users).order_by('-created_at')
 
 class LikePostView(generics.GenericAPIView):
-    queryset = Post.objects.all()
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, pk):
-        post = self.get_object()
-        like, created = Like.objects.get_or_create(post=post, user=request.user)
+        post = generics.get_object_or_404(Post, pk=pk)  # Use generics.get_object_or_404
+        like, created = Like.objects.get_or_create(user=request.user, post=post)  # Adjusted to use user and post
 
         if created:
-            
             # Create notification
             Notification.objects.create(
                 recipient=post.author,
@@ -65,11 +63,10 @@ class LikePostView(generics.GenericAPIView):
         return Response({"error": "You already liked this post."}, status=status.HTTP_400_BAD_REQUEST)
 
 class UnlikePostView(generics.GenericAPIView):
-    queryset = Post.objects.all()
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, pk):
-        post = self.get_object()
+        post = generics.get_object_or_404(Post, pk=pk)  # Use generics.get_object_or_404
         try:
             like = Like.objects.get(post=post, user=request.user)
             like.delete()
