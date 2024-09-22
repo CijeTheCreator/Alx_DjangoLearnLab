@@ -4,10 +4,10 @@ from rest_framework.authtoken.models import Token
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
-    token = serializers.CharField(read_only=True)
+    token = serializers.CharField()
 
     class Meta:
-        model = User
+        model = get_user_model()
         fields = ('username', 'email', 'password', 'token')
 
     def create(self, validated_data):
